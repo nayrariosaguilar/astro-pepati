@@ -1,0 +1,115 @@
+---
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta</title>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            color: #800040;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: gray;
+        }
+
+        .mesa-ruleta {
+            width: 500px;
+            border: 10px solid gray;
+            border-radius: 15px;
+            background-color: #fff;
+            position: relative;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .numeros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+        }
+
+        .numero {
+            padding: 15px;
+            border-radius: 5px;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .numero.par {
+            background-color: #ff0000; /* Rojo para números pares */
+        }
+
+        .numero.impar {
+            background-color: #000000; /* Negro para números impares */
+        }
+
+        .numero.cero {
+            grid-column: span 3;
+            background-color: gray;
+        }
+
+        button {
+            background-color: gray;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: aliceblue;
+        }
+
+        #resultado {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Apuesta en la Mesa de Ruleta!</h1>
+        <div class="mesa-ruleta" id="mesaRuleta">
+            <div class="numeros">
+                <div class="numero cero" data-numero="0"><a href=""> 0</a></div>
+                <div class="numero impar" data-numero="1"><a href="/jugada/1">1</a></div>
+                <div class="numero par" data-numero="2"><a href="/jugada/2">2</a></div>
+                <div class="numero impar" data-numero="3"><a href="/jugada/3">3</a></div>
+                <div class="numero par" data-numero="4"><a href="/jugada/4">4</a></div>
+                <div class="numero impar" data-numero="5"><a href="/jugada/5">5</a></div>
+                <div class="numero par" data-numero="6"><a href="/jugada/6">6</a></div>
+                <div class="numero impar" data-numero="7"><a href="/jugada/7">7</a></div>
+                <div class="numero par" data-numero="8"><a href="/jugada/8">8</a></div>
+                <div class="numero impar" data-numero="9"><a href="/jugada/9">9</a></div>
+                <div class="numero par" data-numero="10"><a href="/jugada/10">10</a></div>
+    </div>
+	
+	<slot />
+</body>
+</html>

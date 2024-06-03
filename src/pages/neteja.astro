@@ -1,0 +1,7 @@
+---
+// netegem la cookie i recarreguem la pàgina index
+Astro.cookies.set("historialJugadas", '[]', { path: '/' });
+
+return Astro.redirect('/');
+
+---

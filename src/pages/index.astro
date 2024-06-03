@@ -1,0 +1,71 @@
+---
+import Layout from "C:/Users/nayri/ruleta/astro-pepati/src/layouts/Layout.astro";
+function reiniciarJuego() {
+	const nuevoSaldo = 150;
+	gameData = []; 
+    Astro.cookies.set("historialJugadas", JSON.stringify([]), { path: '/' }); 
+    Astro.cookies.set("saldoUsuario", nuevoSaldo, { path: '/' }); 
+    return nuevoSaldo;
+}
+let gameData = []; 
+if (!Astro.cookies.has("historialJugadas")) {
+  Astro.cookies.set("historialJugadas", JSON.stringify([]), { path: '/' });
+  return Astro.redirect('/')
+} else {
+	let cookie = Astro.cookies.get("historialJugadas");
+	gameData = JSON.parse(cookie.value); 
+}
+
+//
+function verificarSaldo(saldo) {
+    return saldo >= 10 ? saldo : "game over";
+}
+
+
+function obtenerSaldoActual() {
+    const saldoCookie = Astro.cookies.get("saldoUsuario");
+    const saldo = saldoCookie ? parseInt(saldoCookie.value) : 0; 
+    return saldo;
+}
+function handleClick(option) {
+    window.location.href = `/jugada/${option}`;
+}
+
+---
+<style>
+	li{
+		list-style-type: none;
+		display:inline-block;
+	}
+</style>
+<Layout>
+    <h1>Saldo actual: {verificarSaldo(obtenerSaldoActual())}</h1>
+    <h2>Número de ronda: {gameData.length}</h2>
+    <button @click={() => reiniciarJuego()}>Reiniciar juego</button> 
+
+	<h1>Tria la teva jugada</h1>
+	<ul>
+		<li><button><a href="/jugada/parell">parell</a></button></li>
+		<li><button><a href="/jugada/imparell">imparell</a></button></li>
+		<li><button><a href="/jugada/rojo">rojo</a></button></li>
+		<li><button><a href="/jugada/negre">negre</a></button></li>
+	</ul>
+	<table>
+		
+		<tbody>
+			{gameData.map( item => (
+				<tr>
+					<td>{item.fecha}</td>
+					<td>{item.jugada}</td>
+					<td>{item.numeroSortido}</td>
+					<td>{item.saldo}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+
+    <h1>Jugades anteriors</h1>
+	
+	<a href="/neteja"> historial</a>
+</Layout>
+
